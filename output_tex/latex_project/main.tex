@@ -1,0 +1,151 @@
+Here is the raw LaTeX code following all your strict requirements:
+
+```latex
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\DeclareUnicodeCharacter{2002}{ }
+
+\begin{document}
+
+\title{Online bookstore product catalog with AI-powered personalized recommendations and chat support}
+
+\author{\IEEEauthorblockN{B.~Lakshman, T.~Sundar Dharahas, T.~Karthik, Sk.~Sadath Ali}
+\IEEEauthorblockA{Department of Information Technology,\\
+KKR\&KSR Institute of Technology and Sciences, Guntur.}}
+
+\maketitle
+
+\begin{abstract}
+The increasing demand for personalized digital experience in e-commerce platforms has increased the need for artificial intelligence to enhance user experience. This project presents the development of an ``online bookstore product catalog with AI-powered personalized recommendations and chat support''. The system allows users to browse books, place orders, and manage purchases through a user-friendly web interface. To enhance personalization, the application uses an AI-based recommendation system that suggests books to users based on their browsing behaviour, purchase history, and product similarity. The backend of the system is developed using Spring Boot, Spring AI, and MySQL for secure and efficient data management. The frontend is implemented using Angular.
+\end{abstract}
+
+\section{Introduction}
+Online Bookstores have become a primary medium for purchasing books and giving access to a variety of books of different genres and authors from everywhere to everyone. Because of the advantages of online shopping, digital payments and home delivery, increased the popularity of online bookstores. However many platforms fail to provide recommendations based on the user interests and searching for books will be done manually by the user, which impacts on user satisfaction. Users face difficulty in finding relevant books and customer queries related to orders and returns. There is an increase in demand for platforms which are capable of user behaviour understanding.
+
+Artificial Intelligence came into existence as a powerful tool for enhancing e-commerce platforms through recommendation systems and chatbots. Recommendation systems help users in finding relevant products of their interests, while chatbots give support to customers by providing instant responses. This focuses on developing AI-powered online bookstores that combine both technologies to improve personalization and user experience. The system is implemented using Spring Boot for backend services, Angular for frontend, MySQL for data storage and Spring AI for AI features like recommendation system and chatbot \cite{ref6,ref12}.
+
+\section{Literature Review}
+Recommendation systems become fundamental applications in e-commerce providing suggestions which narrows the large information so that users can get their items which meets their needs. Early recommendation technique collaborative filtering is used to provide recommendations. It provides recommendations based on other users having similar interests. In this technique sufficient data is not available for new users \cite{ref1,ref2}.
+
+To overcome this, content based filtration is used which gives suggestions or recommendations based on the user search history. As this filtering recommends similar items to what the user liked which limits users to discover new or different types of items. Hybrid recommendation systems are used as a solution by combining content and collaborative based approaches \cite{ref5,ref16}.
+
+Chatbots have also evolved significantly these days. In the past, chatbots have predefined scripts and lack of flexibility. In modern days chatbots are evolved and can give human-like responses to users by understanding their intent in the user's language \cite{ref3,ref8}.
+
+\section{Methodology}
+Here is the systematic approach that should be followed to design, develop and evaluate the ai-powered online bookstore system. It focuses on integrating personalized recommendation systems and ai-powered chatbots.
+
+\subsection{Datasets}
+The dataset contains user profiles, book metadata, purchase history, browsing history and transaction records stored in MySQL database. Book metadata is the collection of attributes of the book such as title, author name, genre, description and price.
+
+\subsection{Data preprocessing}
+User interaction data is cleaned in data preprocessing. It is performed to improve quality of data and effectiveness. Duplications and ineffective data are removed from the datasets. Normalization is done to user interaction data to maintain uniformity. AI models are used to transform textual information from books to embedding vectors to support SpringAI. Embedding vectors are the numerical representation of text or items that can be understandable to computers \cite{ref15}.
+
+\subsection{Recommendation system design}
+To get personalized recommendations, hybrid recommendation strategy is used to generate accurate recommendations. A hybrid recommendation is the combination of collaborative filtering and content-based filtering.
+
+Collaborative filtering - This technique is used to analyze user purchase history to identify similar users and recommend books preferred by users having similar interests.
+
+Content-based filtering - Books with similar contextual meaning or genres are recommended.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{image_p4_1.png}}
+\caption{Figure}
+\end{figure}
+
+\subsection{Chatbot Architecture}
+The chatbot is developed using Retrieval-Augmented generation(RAG) to provide accurate and context aware responses \cite{ref3,ref8}. When a user submits a query, the system gets information from the order database. This received data is used by the AI model to produce exact responses related to order tracking, return policies and general enquiries.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{image_p5_1.png}}
+\caption{Figure}
+\end{figure}
+
+\subsection{System Architecture}
+The backend implementation is done by using spring boot and MySQL acts as a primary database to store data \cite{ref6,ref10}. There some AI functionalities used to get recommendations and to create a chatbot using Spring AI \cite{ref12}. The frontend is developed by using Angular for providing a responsive and interactive user interface \cite{ref11}. Communication between frontend and backend is done by RESTful APIs \cite{ref4}.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{image_p6_1.png}}
+\caption{Figure}
+\end{figure}
+
+\subsection{Evaluation Methodology}
+The system evaluation will be based on recommendation relevance and accuracy, response time of chatbots and efficiency of user interaction. The test cases are executed to check the correctness of recommendations and chatbot responses to the different queries asked by customers including tracking and return order. In the early stage of evaluation, it checks for improved personalization and faster query resolution compared to previous approaches.
+
+\section{Results}
+The system provides improved personalization and recommendations. The chatbot effectively handles customer queries, reducing response time and manual work load. User interactions tests to provide user satisfaction and user engagement.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=\columnwidth]{image_p7_1.png}}
+\caption{Figure}
+\end{figure}
+
+\section{Discussion}
+By analyzing the results obtained by evaluating the system we can say that by integrating artificial intelligence to the online bookstore increases the personalization and customer interaction. The hybrid recommendation successfully improved the suggesting of books while maintaining sufficient diversity \cite{ref5,ref16}.
+
+The chatbot component proved effective in handling frequently asked customer queries related to order, tracking and general queries regarding items. By using Retrieval-Augmented Generation strategy, the chatbot produced accurate and context-aware responses, reducing the production of incorrect information. This approach improves user trust and data independency on manual customer support \cite{ref3,ref8}.
+
+From a system perspective, the application produces stable performance with efficient front-end and back-end communication. The use of RESTful APIs produces data exchange between angular(frontend) and spring boot(backend) \cite{ref4,ref11}. Overall, the results say that the system is practical, scalable and suitable for real world e-commerce applications.
+
+\section{Conclusion}
+This project represents the design and implementation of an AI-powered online bookstore that integrates personalized recommendations and chatbot support. By combining user behaviour analysis with content based similarity, the recommendation is improved effectively by book discovery and reduces initial challenges. The chatbot developed by Retrieval-Augmented Generation approach, successfully handles common customer queries related to order and returns, providing immediate response without any false information \cite{ref3,ref8}.
+
+The system was developed using Spring boot for backend services, Angular for the frontend and MySQL for data management, integration of AI is done by using Spring AI \cite{ref6,ref11,ref12}. The primary evolution results demonstrate improved recommendations, faster query resolution and stable performance of the system. In overall, the produced solution enhances user experience, reduces manual customer services and demonstrates the practical application of AI technologies in e-commerce platforms.
+
+In future real time user feedback, advancement in recommendation models and multilingual chat support.
+
+\begin{thebibliography}{99}
+
+\bibitem{ref1}
+F. Ricci, L. Rokach, and B. Shapira, ``Recommender Systems Handbook,'' Springer, 2015.
+
+\bibitem{ref2}
+C. C. Aggarwal, ``Recommender Systems: The Textbook,'' Springer, 2016.
+
+\bibitem{ref3}
+P. Lewis, et al., ``Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,'' Proceedings of NeurIPS, 2020.
+
+\bibitem{ref4}
+R. T. Fielding, ``Architectural Styles and the Design of Network-based Software Architectures,'' Doctoral Dissertation, University of California, 2000.
+
+\bibitem{ref5}
+S. Gupta and A. Kumar, ``A Hybrid Recommender System for E-Commerce using Collaborative and Content-Based Filtering,'' in 2023 IEEE International Conference on Computing, Communication, and Intelligent Systems (ICCCIS), Greater Noida, India, 2023, pp. 450--455.
+
+\bibitem{ref6}
+M. A. Al-Shabi, ``Building Scalable E-Commerce Applications with Spring Boot and Angular,'' Journal of Software Engineering and Applications, vol. 15, no. 4, pp. 112--125, 2022.
+
+\bibitem{ref7}
+P. Lewis et al., ``Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,'' Advances in Neural Information Processing Systems (NeurIPS), vol. 33, pp. 9459--9474, 2020.
+
+\bibitem{ref8}
+T. Nguyen and L. Tran, ``Enhancing Customer Support with AI Chatbots: A RAG Approach,'' in 2024 IEEE International Conference on Advanced Learning Technologies (ICALT), pp. 88--92, Jan. 2024.
+
+\bibitem{ref9}
+V. Patil and S. Deshmukh, ``Design and Implementation of Online Bookstore using Microservices Architecture,'' International Research Journal of Engineering and Technology (IRJET), vol. 8, no. 5, pp. 2301--2305, 2021.
+
+\bibitem{ref10}
+K. S. Jones and N. Gupta, ``Impact of Personalized Recommendations on User Engagement in E-Commerce,'' IEEE Transactions on Computational Social Systems, vol. 9, no. 3, pp. 345--358, 2022.
+
+\bibitem{ref11}
+A. B. C. Silva and D. Ferreira, ``Full Stack Development Best Practices: Angular and Spring Boot,'' in 2022 IEEE Global Engineering Education Conference (EDUCON), Tunis, Tunisia, 2022, pp. 750--755.
+
+\bibitem{ref12}
+J. Lee and S. Park, ``Spring AI: Integrating Large Language Models into Java Applications,'' Journal of Web Engineering, vol. 22, no. 6, pp. 180--198, 2023.
+
+\bibitem{ref13}
+R. Mehta, P. Singh, and V. Sharma, ``Comparative Analysis of Recommendation Algorithms for Digital Libraries,'' International Journal of Information Management Data Insights, vol. 3, no. 2, p. 100156, 2023.
+
+\bibitem{ref14}
+O. Adebayo and F. Ojo, ``Secure Data Management in E-Commerce using MySQL and Spring Security,'' Journal of Cybersecurity and Privacy, vol. 3, no. 1, pp. 12--24, 2023.
+
+\bibitem{ref15}
+G. H. Chen and Y. L. Wu, ``User Behavior Analysis for Personalized Book Recommendations,'' IEEE Access, vol. 11, pp. 34567--34578, 2023.
+
+\bibitem{ref16}
+M. Zubair and A. Khan, ``Performance Evaluation of Hybrid Recommender Systems in Online Retail,'' International Journal of Computer Applications, vol. 184, no. 45, pp. 12--18, 2024.
+
+\end{thebibliography}
+
+\end{document}
