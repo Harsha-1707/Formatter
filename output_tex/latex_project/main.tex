@@ -1,4 +1,4 @@
-Here is the raw LaTeX code following all your strict requirements:
+Here is the LaTeX code in IEEE Conference format, adhering strictly to your requirements:
 
 ```latex
 \documentclass[conference]{IEEEtran}
@@ -6,145 +6,282 @@ Here is the raw LaTeX code following all your strict requirements:
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsfonts}
 \DeclareUnicodeCharacter{2002}{ }
 
 \begin{document}
 
-\title{Online bookstore product catalog with AI-powered personalized recommendations and chat support}
+\title{Touchless System Control Through Dynamic Hand Tracking And Finger Distance Estimation Using Computer Vision}
 
-\author{\IEEEauthorblockN{B.~Lakshman, T.~Sundar Dharahas, T.~Karthik, Sk.~Sadath Ali}
-\IEEEauthorblockA{Department of Information Technology,\\
-KKR\&KSR Institute of Technology and Sciences, Guntur.}}
+\author{
+\IEEEauthorblockN{
+Bathula~Prasanna~Kumar\textsuperscript{1},
+V.~Neha~Likhita\textsuperscript{2},
+T.~Sesi~Venkata~Sowmya\textsuperscript{3},
+SK.~Jasmin\textsuperscript{4},
+R.~Chinmai\textsuperscript{5},
+M.~Sowmya\textsuperscript{6}
+}
+\IEEEauthorblockA{
+\textsuperscript{1}Associate Professor, Dept.~of~CSE\\
+KKR~\&~KSR~Institute~of~Technology~and~Sciences, Guntur\\
+Email: \href{mailto:prasannabpk@gmail.com}{prasannabpk@gmail.com}
+}
+\IEEEauthorblockA{
+\textsuperscript{2,3,4,5,6}B.Tech~student, Dept.~of~CSE--Data~Science\\
+KKR~\&~KSR~Institute~of~Technology~and~Sciences, Guntur\\
+Email: \href{mailto:nehalikhitav@gmail.com}{nehalikhitav@gmail.com},
+\href{mailto:sowmyatiriveedi@gmail.com}{sowmyatiriveedi@gmail.com},
+\href{mailto:22jr1a4482@gmail.com}{22jr1a4482@gmail.com},
+\href{mailto:22jr1a4481@gmail.com}{22jr1a4481@gmail.com},
+\href{mailto:sowmyamannava03@gmail.com}{sowmyamannava03@gmail.com}
+}
+}
 
 \maketitle
 
 \begin{abstract}
-The increasing demand for personalized digital experience in e-commerce platforms has increased the need for artificial intelligence to enhance user experience. This project presents the development of an ``online bookstore product catalog with AI-powered personalized recommendations and chat support''. The system allows users to browse books, place orders, and manage purchases through a user-friendly web interface. To enhance personalization, the application uses an AI-based recommendation system that suggests books to users based on their browsing behaviour, purchase history, and product similarity. The backend of the system is developed using Spring Boot, Spring AI, and MySQL for secure and efficient data management. The frontend is implemented using Angular.
+In recent times touchless interaction has become useful in many areas like hospitals, public systems and smart environment, touching keyboards or screens is not always safe it can also create hygiene problems because of this there is a need for systems that work without touch this project is about developing a touchless system control using computer vision a normal camera is used to capture live video of the user hand, the system detects the hand and follows the movement of the fingers by finding the distance between fingers and different hand gestures are identified these gestures are used to perform simple system tasks such as moving the mouse cursor, clicking, scrolling, zooming and controlling volume no special devices are needed for this system which makes it easy and low cost. The system is simple to use and works in real time. It can be used in healthcare smart systems and other applications where touchless control is required.
 \end{abstract}
 
-\section{Introduction}
-Online Bookstores have become a primary medium for purchasing books and giving access to a variety of books of different genres and authors from everywhere to everyone. Because of the advantages of online shopping, digital payments and home delivery, increased the popularity of online bookstores. However many platforms fail to provide recommendations based on the user interests and searching for books will be done manually by the user, which impacts on user satisfaction. Users face difficulty in finding relevant books and customer queries related to orders and returns. There is an increase in demand for platforms which are capable of user behaviour understanding.
+\begin{IEEEkeywords}
+Touchless System Control, Computer Vision, Hand Tracking, Finger Distance Estimation, Gesture Recognition, Human-Computer Interaction.
+\end{IEEEkeywords}
 
-Artificial Intelligence came into existence as a powerful tool for enhancing e-commerce platforms through recommendation systems and chatbots. Recommendation systems help users in finding relevant products of their interests, while chatbots give support to customers by providing instant responses. This focuses on developing AI-powered online bookstores that combine both technologies to improve personalization and user experience. The system is implemented using Spring Boot for backend services, Angular for frontend, MySQL for data storage and Spring AI for AI features like recommendation system and chatbot \cite{ref6,ref12}.
+\section{Introduction}
+These days, computers are used for nearly everything, including public spaces, schools, and hospitals. Typically, we use a mouse, keyboard, or touchscreen to operate them. But constantly needing to touch these gadgets can be problematic. In public spaces, keyboards can become dirty and worn out, and touching a screen can spread germs in settings like hospitals \cite{ref10}. The goal of this project is to develop a touchless system. You simply move your hand in front of a standard webcam rather than touching anything. The computer tracks your fingers, "sees" your hand, and knows what you want to do. By simply waving or pinching your fingers in the air, you can communicate with your computer \cite{ref2}.
+
+\section{Problem Statement}
+The primary issues we are attempting to resolve are:
+Germs and Hygiene: In public kiosks and hospitals, touching shared keyboards and screens can spread illness. We must be able to use computers without coming into contact with one another.
+
+Expensive Equipment: A lot of the "gesture" systems in use today call for pricey sensors, specialized gloves, or 3D cameras \cite{ref5}. Small businesses and the majority of students cannot afford those.
+Difficulty of Use: If the background is cluttered or the room is a little dark, some systems operate too slowly or poorly. We require a real-time system that operates on a standard laptop \cite{ref7}.
+
+\section{Objectives}
+Our objective is to develop a system that makes "air-control" inexpensive and simple. Our particular objectives are:
+
+\begin{itemize}
+\item Use a Basic Camera: To avoid the need to purchase additional devices, make the system function with just a basic webcam.
+\item Fast Tracking: To prevent the mouse from feeling "laggy," make sure the computer can instantly (in real-time) follow hand movements.
+\item Intelligent Motions: Provide a method for the computer to gauge the separation between fingers. For instance:
+\begin{itemize}
+\item Click the mouse by pinching your fingers.
+\item You can move the cursor by moving your hand.
+\item Zoom in or turn up the volume by spreading your fingers apart.
+\end{itemize}
+\item Easy to Use: Ensure that the system is straightforward enough that anyone can begin using it without a manual in a matter of seconds.
+\end{itemize}
 
 \section{Literature Review}
-Recommendation systems become fundamental applications in e-commerce providing suggestions which narrows the large information so that users can get their items which meets their needs. Early recommendation technique collaborative filtering is used to provide recommendations. It provides recommendations based on other users having similar interests. In this technique sufficient data is not available for new users \cite{ref1,ref2}.
+Touchless system control using computer vision is important to the people who study this stuff because it allows users to work with computers without touching them. Initially, the system people came up with needed gadgets like data gloves and infrared sensors that determined how people moved their hands \cite{ref8}. These systems were good in getting it, but they were highly expensive and uncomfortable to use, thus not wanted to be used by the people every day. This makes the researcher want to find a way, thus starting to look into using just cameras and computer vision to make it work. The touchless system control using computer vision is a deal because it can make way, thus starting to look into using just cameras and computer vision to make it work. This makes things easier for users.
 
-To overcome this, content based filtration is used which gives suggestions or recommendations based on the user search history. As this filtering recommends similar items to what the user liked which limits users to discover new or different types of items. Hybrid recommendation systems are used as a solution by combining content and collaborative based approaches \cite{ref5,ref16}.
+The first researchers who worked on recognizing hand gestures were Freeman and Weissman. This work was done in 1995. Freeman and Weissman employed methods used in image processing to determine whether a hand was moving. Their approach had a major drawback. It would work well only in cases when the background remained constant and the lighting conditions were apt. Therefore, under general conditions hand gesture recognition, as performed by Freeman and Weissman, did not do very well.
 
-Chatbots have also evolved significantly these days. In the past, chatbots have predefined scripts and lack of flexibility. In modern days chatbots are evolved and can give human-like responses to users by understanding their intent in the user's language \cite{ref3,ref8}.
+Machine learning methods improved the accuracy of the hand detection. The first method invented by Viola and Jones, proposed as a general object detection technique in 2001, relied on something called Haar features \cite{ref2}. It was later used by other people for detecting hands. It worked well for simple things. It had a hard time with complicated hand poses when something was in the way, and when the lighting was different. This type of machine learning approach is still used in applications regarding hand detection. Hand detection is what they are trying to improve \cite{ref3}.
+
+Learning introduces significant improvements in hand tracking systems. Tompson and others in 2014 demonstrated the ability of learning to estimate the locations of important parts of a hand from an image \cite{ref4}. The computer no longer needed the manual input of what to look for from the picture. These deep learning models required a large number of images from which to learn. It also required an immense amount of computer power that made its use difficult in hand tracking with deep learning in real time.
+
+This improved vastly when we had systems such as MediaPipe Hands, which were able to track hands in time. MediaPipe Hands was developed in the year 2020 by Zhang et al. This system is very effective in detecting and tracking 21 points of the hand using a normal camera. It does this at a fast speed and finds a wide application in gesture recognition, finger tracking, and object control without touching the object \cite{ref4}. MediaPipe Hands is very helpful in these regards because it gives good results in real time.
+
+People use finger distance estimation as a way to control things. For instance, you can use the distance between your thumb and index finger to make the volume louder or softer, \cite{ref6} zoom in and out. The distance between your finger tips can be measured using points on your hand. Rental did this in 2017. They used these points to calculate how far apart your finger tips are. This method is good, but it might be a little tricky if your hands are too close to the camera. So others came up with ways to do it. They made it more accurate by taking into account the size of your hand and where it's. In this way, finger distance estimation will be more reliable, such as the distance between your thumb and index finger. They have been investigating hand tracking for controlling systems remotely, such as Molchanov and his team, conducted a study in 2018 on hand movements using computer systems \cite{ref1} that look at how hands move over time. While these systems are reasonably good at getting it, they can be very slow and difficult to understand, which makes them not so great for real-time control \cite{ref1}.
+
+Despite these improvements, a number of challenges remain. Lighting changes, fast hand motion, and background noise potentially impact accuracy. The availability of inexpensive, effective, and robust methods for hand-tracking and distance estimation is crucial. This calls for a touchless control system using computer vision that can be easily implemented and perform well under realistic conditions.
 
 \section{Methodology}
-Here is the systematic approach that should be followed to design, develop and evaluate the ai-powered online bookstore system. It focuses on integrating personalized recommendation systems and ai-powered chatbots.
-
-\subsection{Datasets}
-The dataset contains user profiles, book metadata, purchase history, browsing history and transaction records stored in MySQL database. Book metadata is the collection of attributes of the book such as title, author name, genre, description and price.
-
-\subsection{Data preprocessing}
-User interaction data is cleaned in data preprocessing. It is performed to improve quality of data and effectiveness. Duplications and ineffective data are removed from the datasets. Normalization is done to user interaction data to maintain uniformity. AI models are used to transform textual information from books to embedding vectors to support SpringAI. Embedding vectors are the numerical representation of text or items that can be understandable to computers \cite{ref15}.
-
-\subsection{Recommendation system design}
-To get personalized recommendations, hybrid recommendation strategy is used to generate accurate recommendations. A hybrid recommendation is the combination of collaborative filtering and content-based filtering.
-
-Collaborative filtering - This technique is used to analyze user purchase history to identify similar users and recommend books preferred by users having similar interests.
-
-Content-based filtering - Books with similar contextual meaning or genres are recommended.
+This project entails the development of a touchless system designed to facilitate computer control through hand gestures. The operation of this system does not necessitate direct interaction with a keyboard or mouse. A standard webcam is employed to capture hand gestures, and the resulting video is subjected to processing via computer vision techniques to interpret finger movements and distances. Actions on the computer are then executed based on this analysis.
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=\columnwidth]{image_p4_1.png}}
-\caption{Figure}
+\centering
+\includegraphics[width=\columnwidth]{image_p3_1.png}
+\caption{System architecture for touchless control through hand tracking}
+\label{fig:system_architecture}
 \end{figure}
 
-\subsection{Chatbot Architecture}
-The chatbot is developed using Retrieval-Augmented generation(RAG) to provide accurate and context aware responses \cite{ref3,ref8}. When a user submits a query, the system gets information from the order database. This received data is used by the AI model to produce exact responses related to order tracking, return policies and general enquiries.
+\subsection{Operation of the system}
+The system initiates by capturing live videos from the camera. This video is divided into individual frames, which are subsequently analyzed one by one. Within each frame, the system detects the hand and identifies the positions of the fingers. By evaluating the distances between the fingers and monitoring hand movements, the system determines the intended action of the user, which is then carried out on the computer.
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=\columnwidth]{image_p5_1.png}}
-\caption{Figure}
+\centering
+\includegraphics[width=\columnwidth]{image_p4_1.png}
+\caption{Video frame processing pipeline for hand detection}
+\label{fig:video_processing}
 \end{figure}
 
-\subsection{System Architecture}
-The backend implementation is done by using spring boot and MySQL acts as a primary database to store data \cite{ref6,ref10}. There some AI functionalities used to get recommendations and to create a chatbot using Spring AI \cite{ref12}. The frontend is developed by using Angular for providing a responsive and interactive user interface \cite{ref11}. Communication between frontend and backend is done by RESTful APIs \cite{ref4}.
+\subsection{Video Input and Processing}
+A webcam is employed to continuously capture video footage of the user's hand. Each frame of the video is resized to enhance processing speed. The frame is subsequently converted into an appropriate format to facilitate techniques that are implemented to mitigate disruptions caused by variations in lightening or background noise.
+
+\subsection{Hand Detection}
+The system utilizes a hand tracking methodology to identify the hand within the video frame. Key points on the hand, including fingers and joints, are recognized \cite{ref7}. These points enable the system to ascertain the hand's position and movement. Following detection, the hand is smoothly tracked across subsequent frames.
+
+\begin{table}[htbp]
+\centering
+\caption{Landmark IDs and their associated hand parts}
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Landmark ID} & \textbf{Hand Part} & \textbf{Purpose in System} \\
+\hline
+0 & Wrist & Anchor Point \\
+1-4 & Thumb & Distance \& Zoom Control \\
+5-8 & Index Finger & Cursor \& Click Control \\
+9-12 & Middle Finger & Stability Support \\
+13-16 & Ring Finger & Gesture Filtering \\
+17-20 & Pinky Finger & Gesture Filtering \\
+\hline
+\end{tabular}
+\label{tab:landmark_ids}
+\end{table}
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=\columnwidth]{image_p6_1.png}}
-\caption{Figure}
+\centering
+\includegraphics[width=\columnwidth]{image_p5_1.png}
+\caption{Hand landmark detection for gesture recognition}
+\label{fig:hand_landmarks}
 \end{figure}
 
-\subsection{Evaluation Methodology}
-The system evaluation will be based on recommendation relevance and accuracy, response time of chatbots and efficiency of user interaction. The test cases are executed to check the correctness of recommendations and chatbot responses to the different queries asked by customers including tracking and return order. In the early stage of evaluation, it checks for improved personalization and faster query resolution compared to previous approaches.
+\subsection{Finger Distance Calculation}
+The system figures out gestures by looking at how apart the fingers are, especially the space between the thumb and the index finger. It does this by checking where the fingers are on the screen. When the fingers move closer or farther apart the system changes the distance value to match the position of the fingers. The distance between the fingers is really important for the system to understand what the gestures mean so it always checks the space between the thumb and the index finger \cite{ref9}.
+
+\begin{table}[htbp]
+\centering
+\caption{Finger distance to gesture mapping}
+\begin{tabular}{|c|l|l|}
+\hline
+\textbf{Distance (Euclidean)} & \textbf{Hand Gesture} & \textbf{Assigned System Task} \\
+\hline
+0--20 units & Pinch (Proximity) & Left Click / Selection \\
+21--80 units & Open Palm Movement & Cursor Navigation \\
+81--150 units & Dynamic Scaling & Volume / Zoom Control \\
+>150 units & Hand Neutral & Idle Tracking \\
+\hline
+\end{tabular}
+\label{tab:gesture_mapping}
+\end{table}
+
+\subsection{Gesture Recognition}
+Certain tasks are assigned according to the hand's movement and the proximity of the fingers. A click is heard when two fingers get close to one other. For tasks like zooming or adjusting the volume, different finger spacing is used. The cursor can be moved using hand gestures in any direction including left, right, up and down. To identify the particular gestures \cite{ref2}, basic standards are put in place.
+
+\subsection{Execution of Commands}
+The system recognizes the gesture and sends a command to the computer, which then carries out the required actions, such clicking, scrolling, or managing media. To guarantee that the system functions smoothly and intuitively, the response time is kept to a minimum.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{image_p6_1.png}
+\caption{Command execution workflow for gesture-based control}
+\label{fig:command_execution}
+\end{figure}
+
+\subsection{System Efficiency}
+The system is built to function effectively in real-time situations. To improve processing performance, unnecessary computations are reduced. To evaluate the system's dependability, it is tested under a variety of lighting conditions. Changes are made to improve accuracy and reduce delay.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{image_p7_1.png}
+\caption{System efficiency evaluation under different conditions}
+\label{fig:system_efficiency}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{image_p7_2.png}
+\caption{Real-time performance optimization techniques}
+\label{fig:performance_optimization}
+\end{figure}
 
 \section{Results}
-The system provides improved personalization and recommendations. The chatbot effectively handles customer queries, reducing response time and manual work load. User interactions tests to provide user satisfaction and user engagement.
+The camera was used to see how well the touchless system control worked. It worked well. The position of the fingers and the movement of the hand at that exact instant might be tracked by the system. The program was able to identify the finger tips and calculate their separation while the hand was in front of the camera.
+
+Everything functioned flawlessly as you moved your fingers closer or farther apart, including the mouse and pointer. This shows that using the distance between fingers is a way to control things like the mouse and cursor. The touchless system control was very good at tasks. The strategy worked well when the background was simple and the lighting was good.
+
+It was great to see that the gesture responsiveness was really fast and consistent in these situations. But when the background was complex or the lighting was not so good the strategy had some problems. There were delays. It did not always detect gestures correctly. The strategy had trouble with backgrounds and low lighting which caused some delays and mistakes in detecting gestures.
+
+The system continued to operate without crashing, though. Furthermore, it was shown that steady, slow hand movements functioned better than fast ones. Sudden occasionally used obscene hand motions. With a little practice, users were able to use the apparatus more accurately. Overall, the results show that the proposed method may successfully achieve touchless system control by computer vision. The system is reliable for basic tasks and works well with cheap hardware.
+
+\subsection{Performance Metrics}
+\begin{itemize}
+\item Average Accuracy: At an estimated 95.7\%, the system attains a high degree of hand tracking accuracy.
+\item System Response Latency: A crucial indicator of interactivity is the amount of time that passes between a user's action and the system's reaction. The average temporal delay is about 45.0 ms.
+\item Ideal Latency: In immersive environments, targets of less than 20 ms are thought to be optimal for preserving stability and avoiding motion sickness.
+\item Frame Rate: To ensure real-time responsiveness, the system continuously runs at between 30 and 60 frames per second.
+\end{itemize}
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=\columnwidth]{image_p7_1.png}}
-\caption{Figure}
+\centering
+\includegraphics[width=\columnwidth]{image_p8_1.png}
+\caption{Performance metrics visualization for different conditions}
+\label{fig:performance_metrics}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\caption{System performance under different environmental conditions}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Environment Condition} & \textbf{Detection Accuracy (\%)} & \textbf{System Response Latency (ms)} \\
+\hline
+Good Lighting / Plain BG & 96.50\% & 15ms \\
+Low Light Environment & 72.00\% & 35ms \\
+Complex Background & 68.50\% & 42ms \\
+Fast Hand Movements & 54.00\% & 60ms \\
+\hline
+\end{tabular}
+\label{tab:environment_performance}
+\end{table}
+
+\subsection{Latency (Response Time)}
+If there is very little delay, a system feels "real-time." 15 to 25 milliseconds is the average processing time. This indicates that there is no lag when the user moves the mouse because the system is quick enough.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{image_p9_1.png}
+\caption{Latency analysis for real-time interaction}
+\label{fig:latency_analysis}
 \end{figure}
 
 \section{Discussion}
-By analyzing the results obtained by evaluating the system we can say that by integrating artificial intelligence to the online bookstore increases the personalization and customer interaction. The hybrid recommendation successfully improved the suggesting of books while maintaining sufficient diversity \cite{ref5,ref16}.
+The aim of this project was to develop a touchless system control method using hand tracking finger distance estimation through computer vision. After implementing and testing the system, it was observed that the approach works effectively for basic control operations without the need for basic control operations without the need for physical contact.
 
-The chatbot component proved effective in handling frequently asked customer queries related to order, tracking and general queries regarding items. By using Retrieval-Augmented Generation strategy, the chatbot produced accurate and context-aware responses, reducing the production of incorrect information. This approach improves user trust and data independency on manual customer support \cite{ref3,ref8}.
+This project was about creating a way to control things without touching them. The idea was to use computer vision to figure out how away someone's fingers are while the computer is watching the hand move. After the system was built and tested it worked well for doing basic things like controlling the computer without actually touching anything. The touchless system control technique is really good at letting people do things without having to make contact with the computer.
 
-From a system perspective, the application produces stable performance with efficient front-end and back-end communication. The use of RESTful APIs produces data exchange between angular(frontend) and spring boot(backend) \cite{ref4,ref11}. Overall, the results say that the system is practical, scalable and suitable for real world e-commerce applications.
+The system can recognize hand gestures in time using a normal webcam. When you put your hand in front of the camera it can see where your fingers are. The system can tell what you want to do like click or zoom because it can see how apart they are. This makes it easy to control things with your fingers. Hand gesture recognition is really practical because you can just use your fingers to do things like click or zoom and the system will understand what you mean.
+
+The main thing we learned from the experiment is that light makes a difference in how well the system works. We found that the system is really good at detecting hands when the room's bright. It works perfectly when there is plenty of light. When it gets dark or the background is messy the system does not work as well. So it seems that the system works best when the surroundings are bright and clear which means a lit environment is what the system needs to work properly. The system accurately and a well lit environment is ideal for the system.
+
+When we were testing we found out that how fast you move your hand can affect how accurate it is. If you move your hand fast it can sometimes cause delays or do the wrong thing. It usually works if you move your hand slowly and steadily. This implies that it will function better for you the more you practice and learn how to utilize it.
+
+When opposed to using a mouse or keyboard, the touchless method provides a more natural approach to interact with objects. This is especially useful in places, like computers or hospitals where you do not want to touch things that other people have touched \cite{ref10}. The touchless system is made to work with the devices you already have in some situations rather than getting rid of them altogether \cite{ref4}. The touchless system is an option when you want to use the touchless system and your existing devices at the same time \cite{ref2}.
+
+Overall, the findings demonstrate that the suggested system is affordable, easy to use, and successful for simple control tasks. In the future, this method may be expanded to more complicated applications with additional advancements in accuracy and environment adaptability.
 
 \section{Conclusion}
-This project represents the design and implementation of an AI-powered online bookstore that integrates personalized recommendations and chatbot support. By combining user behaviour analysis with content based similarity, the recommendation is improved effectively by book discovery and reduces initial challenges. The chatbot developed by Retrieval-Augmented Generation approach, successfully handles common customer queries related to order and returns, providing immediate response without any false information \cite{ref3,ref8}.
+For this project we created a way to control things without touching them. We achieved this by studying people's finger spacing and hand motions. This experiment's main goal was to utilize a computer without a keyboard or mouse. We watched how people moved their hands when they used computer applications. We used a regular camera to do this. We observed peoples hand movements to see how they interacted with the computer.
 
-The system was developed using Spring boot for backend services, Angular for the frontend and MySQL for data management, integration of AI is done by using Spring AI \cite{ref6,ref11,ref12}. The primary evolution results demonstrate improved recommendations, faster query resolution and stable performance of the system. In overall, the produced solution enhances user experience, reduces manual customer services and demonstrates the practical application of AI technologies in e-commerce platforms.
+The device can see what people are doing with their hands and measure how apart their fingers are. This lets people do things like move the computer cursor around and control it. When we use the distance between fingers it feels more like we are really using our hands. When we move our hands and fingers, the computer can comprehend our intentions just like when we use our hands naturally.
 
-In future real time user feedback, advancement in recommendation models and multilingual chat support.
+The technology is really user-friendly. The project shows that touchless control using hand tracking is very useful and it works. The device responds fast when the light is normal. When the light is bad or you move your hands very quickly it might not work perfectly. With these problems the technology is good, for simple touchless control tasks.
+
+This study shows computer visions can be used to make affordable touchless solutions. The touchless control system is an example of this. Touchless control using hand tracking is a part of this study. This kind of technology is helpful in situations like public and assistive systems when physical contact is risky \cite{ref6}. The system's precision, gesture controls, and performance in various contexts could all be enhanced in the future.
 
 \begin{thebibliography}{99}
+\bibitem{ref1} Ghasemaghaei A., Giachetti, A., Laviola Jr., J. J., \& Emporio, M. (2025). Continuous hand gesture recognition: techniques and benchmarks. Image Understanding and computer vision, 259, Article 104435.
 
-\bibitem{ref1}
-F. Ricci, L. Rokach, and B. Shapira, ``Recommender Systems Handbook,'' Springer, 2015.
+\bibitem{ref2} Kumar, A., \& Jha, H. Gesture recognition. Scribd, 2025.
 
-\bibitem{ref2}
-C. C. Aggarwal, ``Recommender Systems: The Textbook,'' Springer, 2016.
+\bibitem{ref3} Lakshminarayanan, A. R., Abdul Aziz Khan, A., Sriram, R., Sathick, K. J., Baskar, S. Recognizing gestures with computer vision methods. Journal of Social Studies and Educational Research, Turquoise International, July 2024.
 
-\bibitem{ref3}
-P. Lewis, et al., ``Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,'' Proceedings of NeurIPS, 2020.
+\bibitem{ref4} Tran, D.-S., Ho, N.-H., Yang, H.-J., Kim, S.-H., \& Lee, G.-S. (2021). Real-time virtual mouse system employing RGB-D pictures and fingertip identification. Multimedia Tools Appl., vol. 80, pp. 10473--10490.
 
-\bibitem{ref4}
-R. T. Fielding, ``Architectural Styles and the Design of Network-based Software Architectures,'' Doctoral Dissertation, University of California, 2000.
+\bibitem{ref5} Mujahid, A., Awan, M. J., Yasin, A., Mohammed, M. A., Damaševičius, R., Maskeliūnas, R., \& Abdulkareem, K. H. (2021). Hand gesture recognition using computer vision and deep learning techniques. Applied Sciences (Appl. Sci.), 11(9).
 
-\bibitem{ref5}
-S. Gupta and A. Kumar, ``A Hybrid Recommender System for E-Commerce using Collaborative and Content-Based Filtering,'' in 2023 IEEE International Conference on Computing, Communication, and Intelligent Systems (ICCCIS), Greater Noida, India, 2023, pp. 450--455.
+\bibitem{ref6} Oudah, M., Al-Naji, A., and Chahl, J. (2020). Hand Gesture Recognition Based on Computer Vision: A Review of Techniques. Journal of Imaging, vol. 6, no. 8, Article 73.
 
-\bibitem{ref6}
-M. A. Al-Shabi, ``Building Scalable E-Commerce Applications with Spring Boot and Angular,'' Journal of Software Engineering and Applications, vol. 15, no. 4, pp. 112--125, 2022.
+\bibitem{ref7} Tran, D.-S., Ho, N.-H., Yang, H.-J., Kim, S.-H., \& Lee, G.-S. (2020). Real-time virtual mouse system employing RGB-D pictures and fingertip sensing. International Journal of Precision Engineering and Manufacturing, vol.21, no. 5, pp. 689-696.
 
-\bibitem{ref7}
-P. Lewis et al., ``Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,'' Advances in Neural Information Processing Systems (NeurIPS), vol. 33, pp. 9459--9474, 2020.
+\bibitem{ref8} Prakasam, S., Venkatachalam, M., Saroja, M., \& Pradheep, N. (2016). Gesture recognition using computer vision. International Research Journal of Engineering and Technology (IRJET), 3(9), Sep. 2016.
 
-\bibitem{ref8}
-T. Nguyen and L. Tran, ``Enhancing Customer Support with AI Chatbots: A RAG Approach,'' in 2024 IEEE International Conference on Advanced Learning Technologies (ICALT), pp. 88--92, Jan. 2024.
+\bibitem{ref9} Chen, Z.-h., Kim, J.-T., Liang, J., Zhang, J., \& Yuan, Y.-B. (2014). Real-Time Hand Gesture Recognition Using Finger Segmentation. ScientificWorldJournal.
 
-\bibitem{ref9}
-V. Patil and S. Deshmukh, ``Design and Implementation of Online Bookstore using Microservices Architecture,'' International Research Journal of Engineering and Technology (IRJET), vol. 8, no. 5, pp. 2301--2305, 2021.
-
-\bibitem{ref10}
-K. S. Jones and N. Gupta, ``Impact of Personalized Recommendations on User Engagement in E-Commerce,'' IEEE Transactions on Computational Social Systems, vol. 9, no. 3, pp. 345--358, 2022.
-
-\bibitem{ref11}
-A. B. C. Silva and D. Ferreira, ``Full Stack Development Best Practices: Angular and Spring Boot,'' in 2022 IEEE Global Engineering Education Conference (EDUCON), Tunis, Tunisia, 2022, pp. 750--755.
-
-\bibitem{ref12}
-J. Lee and S. Park, ``Spring AI: Integrating Large Language Models into Java Applications,'' Journal of Web Engineering, vol. 22, no. 6, pp. 180--198, 2023.
-
-\bibitem{ref13}
-R. Mehta, P. Singh, and V. Sharma, ``Comparative Analysis of Recommendation Algorithms for Digital Libraries,'' International Journal of Information Management Data Insights, vol. 3, no. 2, p. 100156, 2023.
-
-\bibitem{ref14}
-O. Adebayo and F. Ojo, ``Secure Data Management in E-Commerce using MySQL and Spring Security,'' Journal of Cybersecurity and Privacy, vol. 3, no. 1, pp. 12--24, 2023.
-
-\bibitem{ref15}
-G. H. Chen and Y. L. Wu, ``User Behavior Analysis for Personalized Book Recommendations,'' IEEE Access, vol. 11, pp. 34567--34578, 2023.
-
-\bibitem{ref16}
-M. Zubair and A. Khan, ``Performance Evaluation of Hybrid Recommender Systems in Online Retail,'' International Journal of Computer Applications, vol. 184, no. 45, pp. 12--18, 2024.
+\bibitem{ref10} Grätzel, C., Fong, T., Grange, S., \& Baur, C. (2004). A non-contact mouse for surgeon-computer interface. Technol. Health Care, vol. 12, no. 3, pp. 245--257.
 
 \end{thebibliography}
 

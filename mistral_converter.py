@@ -94,31 +94,62 @@ def generate_latex_with_mistral(client, text_content):
     STRICT REQUIREMENTS:
     1. **VERBATIM CONTENT (CRITICAL)**: You are a conversion engine, not an editor. You MUST NOT rephrase, summarize, or "improve" the text. Keep every single word, sentence structure, and grammatical quirk EXACTLY as found in the source text. Your job is ONLY to add LaTeX markup.
     
-    2. **SMART CITATION INJECTION**: 
+    2. **AUTHOR BLOCK (IEEE COMPLIANT)**:
+       - Use proper IEEE author formatting with \\IEEEauthorblockN{} for names and \\IEEEauthorblockA{} for affiliations
+       - All author names should be in a SINGLE \\IEEEauthorblockN{} block, separated by commas with \\textsuperscript{N}
+       - Use tildes (~) for non-breaking spaces in names (e.g., Dr.~A.~Kumar)
+       - Make emails CLICKABLE using \\href{mailto:email@example.com}{email@example.com}
+       - Use double-dash (--) in department names (e.g., CSE--Data Science)
+       - CRITICAL: Use \\textsuperscript{N} for numeric superscripts (1,2,3...), NOT \\IEEEauthorrefmark{N} which creates symbols
+       - Example format:
+         \\author{
+         \\IEEEauthorblockN{
+         Dr.~A.~Kumar\\textsuperscript{1},
+         B.~Student\\textsuperscript{2}
+         }
+         \\IEEEauthorblockA{
+         \\textsuperscript{1}Professor, Dept. of CSE--Data Science\\\\
+         Institution Name\\\\
+         Email: \\href{mailto:email@example.com}{email@example.com}
+         }
+         \\IEEEauthorblockA{
+         \\textsuperscript{2}Student, Dept. of CSE--Data Science\\\\
+         Institution Name\\\\
+         Email: \\href{mailto:student@example.com}{student@example.com}
+         }
+         }
+    
+    3. **SMART CITATION INJECTION**: 
        - The extracted text might lack explicit citation markers (like `[1]`). 
        - You must analyze the **References/Bibliography** section at the end of the text.
        - As you process the body text, if you see a mention of a specific author, paper title, or unique concept that clearly matches one of the references, **INSERT** a citation command `\\cite{refN}` at that location.
        - Example: If text says "Smith showed..." and Reference 3 is "Smith et al...", change text to "Smith showed... \\cite{ref3}".
        - Also convert existing `[1]` to `\\cite{ref1}`.
 
-    3. **Images**: Replace `[IMAGE_MARKER: filename]` with:
+    4. **FIGURES (IEEE COMPLIANT)**:
+       - Replace `[IMAGE_MARKER: filename]` with:
        ```latex
        \\begin{figure}[htbp]
-       \\centerline{\\includegraphics[width=\\columnwidth]{filename}}
-       \\caption{Figure} 
+       \\centering
+       \\includegraphics[width=\\columnwidth]{filename}
+       \\caption{Meaningful description of the figure}
+       \\label{fig:descriptive_label}
        \\end{figure}
        ```
+       - CRITICAL: Use \\centering NOT \\centerline{}
+       - Provide meaningful captions, not just "Figure"
+       - Add \\label{fig:name} for cross-referencing
 
-    4. **Bibliography & Reliability**:
+    5. **Bibliography & Reliability**:
        - Create `\\begin{thebibliography}{99}` at the end.
        - **Validation**: ONLY include references that are valid (real papers/books). DISCARD obvious OCR errors or junk lines.
        - Format as `\\bibitem{refN} Author, "Title", Source, Year.` matching the N used in your citations.
 
-    5. **Formatting**: Use `\\section{}`, `\\subsection{}` based on the layout, but primarily preserve the structure.
+    6. **Formatting**: Use `\\section{}`, `\\subsection{}` based on the layout, but primarily preserve the structure.
     
-    6. **Preamble**: Start with `\\documentclass[conference]{IEEEtran}`. Include `\\usepackage{cite}`, `\\usepackage{hyperref}`, `\\usepackage{url}`, `\\usepackage{graphicx}`. Add `\\DeclareUnicodeCharacter{2002}{ }`.
+    7. **Preamble**: Start with `\\documentclass[conference]{IEEEtran}`. Include `\\usepackage{cite}`, `\\usepackage{hyperref}`, `\\usepackage{url}`, `\\usepackage{graphicx}`. Add `\\DeclareUnicodeCharacter{2002}{ }`.
 
-    7. **Output**: Return ONLY the raw LaTeX code. No markdown blocks.
+    8. **Output**: Return ONLY the raw LaTeX code. No markdown blocks.
 
     Here is the content:
     HTML_CONTENT_PLACEHOLDER
