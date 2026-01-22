@@ -94,30 +94,48 @@ def generate_latex_with_mistral(client, text_content):
     STRICT REQUIREMENTS:
     1. **VERBATIM CONTENT (CRITICAL)**: You are a conversion engine, not an editor. You MUST NOT rephrase, summarize, or "improve" the text. Keep every single word, sentence structure, and grammatical quirk EXACTLY as found in the source text. Your job is ONLY to add LaTeX markup.
     
-    2. **AUTHOR BLOCK (IEEE COMPLIANT)**:
-       - Use proper IEEE author formatting with \\IEEEauthorblockN{} for names and \\IEEEauthorblockA{} for affiliations
-       - All author names should be in a SINGLE \\IEEEauthorblockN{} block, separated by commas with \\textsuperscript{N}
-       - Use tildes (~) for non-breaking spaces in names (e.g., Dr.~A.~Kumar)
-       - Make emails CLICKABLE using \\href{mailto:email@example.com}{email@example.com}
-       - Use double-dash (--) in department names (e.g., CSE--Data Science)
-       - CRITICAL: Use \\textsuperscript{N} for numeric superscripts (1,2,3...), NOT \\IEEEauthorrefmark{N} which creates symbols
-       - Example format:
-         \\author{
-         \\IEEEauthorblockN{
-         Dr.~A.~Kumar\\textsuperscript{1},
-         B.~Student\\textsuperscript{2}
-         }
-         \\IEEEauthorblockA{
-         \\textsuperscript{1}Professor, Dept. of CSE--Data Science\\\\
-         Institution Name\\\\
-         Email: \\href{mailto:email@example.com}{email@example.com}
-         }
-         \\IEEEauthorblockA{
-         \\textsuperscript{2}Student, Dept. of CSE--Data Science\\\\
-         Institution Name\\\\
-         Email: \\href{mailto:student@example.com}{student@example.com}
-         }
-         }
+    2. **AUTHOR BLOCK (IEEE COMPLIANT - SIDE-BY-SIDE COLUMN FORMAT)**:
+       ⚠️ CRITICAL: Use the SIDE-BY-SIDE multi-column layout format
+       
+       **Format Structure**:
+       - Each author or author group gets their own COLUMN
+       - Each column contains: Name block + Affiliation block stacked vertically
+       - Columns are placed side-by-side automatically by LaTeX
+       
+       **Rules**:
+       - Use separate \\IEEEauthorblockN{} for each author/group's NAME
+       - Immediately follow with \\IEEEauthorblockA{} for that author/group's AFFILIATION
+       - Do NOT use superscripts for linking names to affiliations
+       - Each column is self-contained (name + affiliation together)
+       - Use tildes (~) for non-breaking spaces in names
+       - Use double-dash (--) in department names (e.g., CSE--AIML)
+       - Make emails clickable: \\href{mailto:email@example.com}{email@example.com}
+       
+       **Example (2 authors, 2 columns)**:
+       \\author{
+       \\IEEEauthorblockN{Trisulapani~Akki\\textsuperscript{1}}
+       \\IEEEauthorblockA{
+       \\textsuperscript{1}M.Tech student, Dept of CSE--AIML\\\\
+       KKR \\& KSR Institute of Technology and\\\\
+       Sciences, Guntur, Andhra Pradesh\\\\
+       \\href{mailto:akki.trisulapani@gmail.com}{akki.trisulapani@gmail.com}
+       }
+       \\and
+       \\IEEEauthorblockN{Dr.~S~Sri~Lakshmi~Parvathi\\textsuperscript{2}}
+       \\IEEEauthorblockA{
+       \\textsuperscript{2}Professor, Dept of CSE\\\\
+       KKR \\& KSR Institute of Technology and\\\\
+       Sciences, Guntur, Andhra Pradesh\\\\
+       \\href{mailto:s.srilakshmiparvathi@gmail.com}{s.srilakshmiparvathi@gmail.com}
+       }
+       }
+       
+       **Key Points**:
+       - Use \\and between author columns to separate them
+       - Each \\IEEEauthorblockN{} contains ONE author name
+       - Each \\IEEEauthorblockA{} contains that author's full affiliation + email
+       - Superscripts are optional decorations, not for linking
+       - This creates a clean side-by-side layout
     
     3. **SMART CITATION INJECTION**: 
        - The extracted text might lack explicit citation markers (like `[1]`). 
@@ -173,7 +191,13 @@ def generate_latex_with_mistral(client, text_content):
             
             text = chat_response.choices[0].message.content
             
-            # Clean up markdown
+            
+            # Clean up markdown - improved to handle explanatory text
+            # Remove everything before the first \documentclass
+            if '\\documentclass' in text:
+                text = text[text.find('\\documentclass'):]
+            
+            # Remove markdown code fences
             if text.startswith("```latex"):
                 text = text[8:]
             if text.startswith("```"):
@@ -194,6 +218,32 @@ def generate_latex_with_mistral(client, text_content):
             print(f"Error calling Mistral API (Attempt {attempt+1}/3): {e}")
             time.sleep(5) # Brief wait for network blips
     return None
+
+def fix_author_block_format(latex_code):
+    """
+    Post-process the LaTeX to ensure proper formatting.
+    Note: Does NOT abbreviate names - keeps them as-is from Mistral output.
+    """
+    # Just do basic cleanup - remove excessive whitespace
+    # The side-by-side format from Mistral should already be correct
+    
+    # Compact emails that are split across multiple lines
+    email_pattern = r'(Emails?:\s*)((?:\\href\{mailto:[^}]+\}\{[^}]+\}(?:,\s*)?)+)'
+    
+    def compact_emails(match):
+        prefix = match.group(1)
+        emails_section = match.group(2)
+        
+        # Remove newlines from email section
+        compacted_emails = re.sub(r'\s*\n\s*', ' ', emails_section.strip())
+        # Ensure single space after commas
+        compacted_emails = re.sub(r',\s+', ', ', compacted_emails)
+        
+        return prefix + compacted_emails
+    
+    latex_code = re.sub(email_pattern, compact_emails, latex_code, flags=re.MULTILINE)
+    
+    return latex_code
 
 def main():
     client = setup_mistral()
@@ -233,6 +283,10 @@ def main():
             latex_code = generate_latex_with_mistral(client, raw_text)
             
             if latex_code:
+                # 2.5. Post-process to fix author block formatting
+                latex_code = fix_author_block_format(latex_code)
+                print("Post-processed author block for proper two-row format")
+                
                 output_tex_path = os.path.join(project_dir, "main.tex")
                 with open(output_tex_path, "w", encoding="utf-8") as f:
                     f.write(latex_code)
